@@ -1,5 +1,5 @@
-import 'package:flutter_dog_and_bone_game/models/cell.dart';
-import 'package:flutter_dog_and_bone_game/utils/cell_type.dart';
+import '../utils/cell_type.dart';
+import 'cell.dart';
 
 class Player {
   Cell position;

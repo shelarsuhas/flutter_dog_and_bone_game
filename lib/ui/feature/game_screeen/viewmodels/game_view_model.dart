@@ -5,8 +5,10 @@ import '../../../../models/game.dart';
 import '../../../../utils/swipe_direction.dart';
 
 class GameViewModel extends BaseViewModel {
-  int row = 20;
-  int col = 40;
+  int row = 10;
+  int col = 20;
+
+  SwipeDirection direction = SwipeDirection.none;
 
   late Game game;
 
@@ -15,9 +17,8 @@ class GameViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void onSwipe(SwipeDirection direction) {
+  void onSwipe() {
     game.onUserSwipe(direction);
-    print(direction);
     notifyListeners();
   }
 

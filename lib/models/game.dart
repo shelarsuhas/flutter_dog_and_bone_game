@@ -23,7 +23,6 @@ class Game {
       if (direction != SwipeDirection.none) {
         Cell nextCell = getNextCell(player.getCurrentPosition(), direction);
 
-        player.move(nextCell);
         if (nextCell.cellType == CellType.token) {
           score++;
           if (score == 10) {
@@ -32,6 +31,8 @@ class Game {
             board.generateToken();
           }
         }
+
+        player.move(nextCell);
       }
     }
   }
@@ -41,28 +42,28 @@ class Game {
     int col = currentPosition.col;
 
     if (direction == SwipeDirection.right) {
-      col++;
-    } else if (direction == SwipeDirection.left) {
-      col--;
-    } else if (direction == SwipeDirection.up) {
-      row--;
-    } else if (direction == SwipeDirection.left) {
       row++;
+    } else if (direction == SwipeDirection.left) {
+      row--;
+    } else if (direction == SwipeDirection.up) {
+      col--;
+    } else if (direction == SwipeDirection.down) {
+      col++;
     }
 
-    // if (row < 0) {
-    //   row = board.rowCount;
-    // }
-    // if (row > board.rowCount) {
-    //   row = 0;
-    // }
+    if (row < 0) {
+      row = board.rowCount - 1;
+    }
+    if (row >= board.rowCount) {
+      row = 0;
+    }
 
-    // if (col < 0) {
-    //   col = board.colCount;
-    // }
-    // if (col > board.colCount) {
-    //   col = 0;
-    // }
+    if (col < 0) {
+      col = board.colCount - 1;
+    }
+    if (col >= board.colCount) {
+      col = 0;
+    }
 
     return board.getCells()[row][col];
   }

@@ -22,17 +22,23 @@ class GameScreen extends StatelessWidget {
               child: GestureDetector(
                 onVerticalDragUpdate: (details) {
                   if (details.delta.dy > 0) {
-                    model.onSwipe(SwipeDirection.down);
+                    model.direction = SwipeDirection.down;
                   } else {
-                    model.onSwipe(SwipeDirection.up);
+                    model.direction = SwipeDirection.up;
                   }
+                },
+                onVerticalDragEnd: (detail) {
+                  model.onSwipe();
                 },
                 onHorizontalDragUpdate: (details) {
                   if (details.delta.dx > 0) {
-                    model.onSwipe(SwipeDirection.right);
+                    model.direction = SwipeDirection.right;
                   } else {
-                    model.onSwipe(SwipeDirection.left);
+                    model.direction = SwipeDirection.left;
                   }
+                },
+                onHorizontalDragEnd: (details) {
+                  model.onSwipe();
                 },
                 child: AspectRatio(
                   aspectRatio: model.row / (model.col + 5),
@@ -75,12 +81,14 @@ class GameScreen extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: Text(
-                      "Score: 2",
-                      style: TextStyle(
+                      model.game.score >= 10
+                          ? "WINNER!!"
+                          : "Score: ${model.game.score}",
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                       ),
