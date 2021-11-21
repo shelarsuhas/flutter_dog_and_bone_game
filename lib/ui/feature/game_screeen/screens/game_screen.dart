@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dog_and_bone_game/models/cell.dart';
-import 'package:flutter_dog_and_bone_game/utils/cell_type.dart';
-import 'package:flutter_dog_and_bone_game/utils/swipe_direction.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../../models/cell.dart';
+import '../../../../utils/cell_type.dart';
+import '../../../../utils/game_constants.dart';
+import '../../../../utils/swipe_direction.dart';
 import '../viewmodels/game_view_model.dart';
 
 class GameScreen extends StatelessWidget {
@@ -85,7 +86,7 @@ class GameScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: Text(
-                      model.game.score >= 10
+                      model.game.score >= kMaxScore
                           ? "WINNER!!"
                           : "Score: ${model.game.score}",
                       style: const TextStyle(

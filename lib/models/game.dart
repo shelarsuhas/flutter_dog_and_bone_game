@@ -1,9 +1,9 @@
-import 'package:flutter_dog_and_bone_game/models/cell.dart';
-import 'package:flutter_dog_and_bone_game/models/player.dart';
-import 'package:flutter_dog_and_bone_game/utils/cell_type.dart';
-import 'package:flutter_dog_and_bone_game/utils/swipe_direction.dart';
-
+import '../utils/cell_type.dart';
+import '../utils/game_constants.dart';
+import '../utils/swipe_direction.dart';
 import 'board.dart';
+import 'cell.dart';
+import 'player.dart';
 
 class Game {
   late Player player;
@@ -18,6 +18,13 @@ class Game {
     board.generateToken();
   }
 
+  void restartGame() {
+    score = 0;
+    isGameOver = false;
+    //player = Player(position: board.generateRandomStartPosition());
+    board.generateToken();
+  }
+
   void onUserSwipe(SwipeDirection direction) {
     if (!isGameOver) {
       if (direction != SwipeDirection.none) {
@@ -25,7 +32,7 @@ class Game {
 
         if (nextCell.cellType == CellType.token) {
           score++;
-          if (score == 10) {
+          if (score == kMaxScore) {
             isGameOver = true;
           } else {
             board.generateToken();

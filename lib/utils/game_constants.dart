@@ -1,0 +1,1 @@
+const kMaxScore = 10;
